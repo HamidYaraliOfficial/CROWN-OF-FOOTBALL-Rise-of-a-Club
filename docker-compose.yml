@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: crownfootball
+      POSTGRES_USER: crownfootball
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-this-local-password}
+    ports:
+      - "5433:5432"
+    volumes:
+      - crown-football-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crownfootball -d crownfootball"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  crown-football-postgres:

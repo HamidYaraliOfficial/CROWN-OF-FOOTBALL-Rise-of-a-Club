@@ -1,0 +1,38 @@
+{
+  "name": "crown-of-football",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CROWN OF FOOTBALL — a browser-based football club management and match simulation game by Hamid Yarali.",
+  "author": "Hamid Yarali (https://github.com/HamidYaraliOfficial)",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HamidYaraliOfficial/crown-of-football.git"
+  },
+  "keywords": [
+    "football-manager",
+    "sports-management",
+    "threejs",
+    "react",
+    "simulation",
+    "crown-of-football"
+  ],
+  "workspaces": [
+    "apps/web",
+    "apps/api"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @crown-of-football/web",
+    "dev:full": "concurrently -k -n WEB,API -c green,blue \"npm run dev --workspace @crown-of-football/web\" \"npm run start:dev --workspace @crown-of-football/api\"",
+    "build": "npm run build --workspace @crown-of-football/web && npm run build --workspace @crown-of-football/api",
+    "test": "npm run test --workspace @crown-of-football/web && npm run test --workspace @crown-of-football/api",
+    "preview": "npm run preview --workspace @crown-of-football/web",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "verify:standalone": "node scripts/verify-standalone.cjs",
+    "test:offline": "node scripts/smoke-offline.cjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
